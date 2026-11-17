@@ -1,0 +1,14 @@
+# Kişisel ayarlar: Claude API anahtarı burada saklanır — ASLA yükleme.
+# İlk çalıştırmada varsayılan ayarlarla otomatik oluşturulur.
+ayarlar.json
+
+# Jarvis'e verilen komutların ve hataların günlükleri
+jarvis_gunluk.txt
+jarvis_hata.txt
+
+# Python önbelleği
+__pycache__/
+*.pyc
+
+# Ortam değişkeni dosyaları
+.env

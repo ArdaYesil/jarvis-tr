@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stil.css">
+</head>
+<body data-durum="baslatiliyor">
+<div class="arka-izgara"></div>
+<div class="arka-vinyet"></div>
+<div class="tarama"></div>
+
+<!-- AÇILIŞ EKRANI -->
+<div class="acilis-ekrani" id="acilis">
+  <div class="ae-icerik">
+    <svg class="ae-halka" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="92" class="ae-h1"/>
+      <circle cx="100" cy="100" r="78" class="ae-h2"/>
+      <circle cx="100" cy="100" r="62" class="ae-h3"/>
+      <circle cx="100" cy="100" r="30" class="ae-cekirdek"/>
+    </svg>
+    <div class="ae-baslik">J.A.R.V.I.S</div>
+    <div class="ae-alt">SİSTEM BAŞLATILIYOR</div>
+    <ul class="ae-satirlar" id="ae-satirlar"></ul>
+    <div class="ae-ilerleme"><i id="ae-ilerleme"></i></div>
+  </div>
+</div>
+
+<!-- ÜST ÇUBUK -->
+<header class="ust">
+  <div class="marka pywebview-drag-region">
+    <svg class="marka-ikon" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="17" class="mi-dis"/>
+      <circle cx="20" cy="20" r="11" class="mi-ic"/>
+      <circle cx="20" cy="20" r="4" class="mi-cekirdek"/>
+    </svg>
+    <div class="pywebview-drag-region">
+      <div class="marka-ad pywebview-drag-region">J.A.R.V.I.S</div>
+      <div class="marka-alt pywebview-drag-region">KİŞİSEL SESLİ ASİSTAN · v2.0</div>
+    </div>
+  </div>
+  <nav class="arac-cubugu" aria-label="Paneller">
+    <button class="arac-btn" data-cekmece="c-sistem" title="Sistem durumu (Alt+1)">
+      <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>SİSTEM</button>
+    <button class="arac-btn" data-cekmece="c-uygulamalar" title="Hızlı erişim (Alt+2)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>UYGULAMALAR</button>
+    <button class="arac-btn" data-cekmece="c-rehber" title="Komut rehberi (Alt+3)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.5"/></svg>REHBER</button>
+    <button class="arac-btn" data-cekmece="c-ayarlar" title="Ayarlar (Alt+4)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>AYARLAR<em class="nokta" id="ayar-noktasi"></em></button>
+  </nav>
+  <div class="ust-sag">
+    <div class="saat-blok pywebview-drag-region">
+      <div class="saat" id="saat">--:--:--</div>
+      <div class="tarih" id="tarih">—</div>
+    </div>
+    <div class="pencere-btn">
+      <button id="btn-kucult" title="Küçült"><svg viewBox="0 0 12 12"><path d="M2 6h8"/></svg></button>
+      <button id="btn-buyut" title="Büyüt"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8"/></svg></button>
+      <button id="btn-kapat" class="kapat" title="Kapat"><svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="sahne">
+  <section class="merkez">
+    <div class="reaktor-alan">
+      <div class="koseli k1"></div><div class="koseli k2"></div><div class="koseli k3"></div><div class="koseli k4"></div>
+      <div class="yan-veri sol-veri">
+        <div><small>İŞLEMCİ</small><b id="yv-cpu">—</b></div>
+        <div><small>BELLEK</small><b id="yv-ram">—</b></div>
+        <div><small>AĞ ↓</small><b id="yv-ag">—</b></div>
+      </div>
+      <div class="yan-veri sag-veri">
+        <div><small>UYANDIRMA</small><b id="yv-uyandirma">JARVIS</b></div>
+        <div><small>MOD</small><b id="yv-mod">SESLİ</b></div>
+        <div><small>YAPAY ZEKÂ</small><b id="yv-yz">—</b></div>
+      </div>
+
+      <div class="reaktor" id="reaktor">
+        <canvas id="dalga"></canvas>
+        <svg viewBox="0 0 400 400" class="reaktor-svg">
+          <defs>
+            <radialGradient id="cekirdekGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+              <stop offset="35%" style="stop-color:var(--vurgu);stop-opacity:.95"/>
+              <stop offset="75%" style="stop-color:var(--vurgu);stop-opacity:.25"/>
+              <stop offset="100%" style="stop-color:var(--vurgu);stop-opacity:0"/>
+            </radialGradient>
+            <path id="yaziYolu" d="M200,200 m-139,0 a139,139 0 1,1 278,0 a139,139 0 1,1 -278,0"/>
+          </defs>
+          <g id="tikler" class="r-tik"></g>
+          <circle cx="200" cy="200" r="182" class="r-ince"/>
+          <g class="don don-60"><circle cx="200" cy="200" r="172" class="r-kesikli"/></g>
+          <g class="don don-ters-24">
+            <path class="r-yay" d="M200 45 A155 155 0 0 1 334 122"/>
+            <path class="r-yay" d="M355 200 A155 155 0 0 1 278 334"/>
+            <path class="r-yay" d="M122 334 A155 155 0 0 1 45 200"/>
+            <path class="r-yay ince" d="M66 122 A155 155 0 0 1 160 50"/>
+          </g>
+          <g class="don don-40">
+            <text class="r-yazi"><textPath href="#yaziYolu">SESLİ KOMUT SİSTEMİ · DİNLEME PROTOKOLÜ AKTİF · JARVIS ÇEKİRDEK v2.0 · KİŞİSEL ASİSTAN ·</textPath></text>
+          </g>
+          <g class="don don-ters-12"><circle cx="200" cy="200" r="122" class="r-noktali"/></g>
+          <g class="don don-8">
+            <path class="r-yay2" d="M200 92 A108 108 0 0 1 293 146"/>
+            <path class="r-yay2" d="M107 254 A108 108 0 0 1 107 146"/>
+          </g>
+          <circle cx="200" cy="200" r="92" class="r-ic-cerceve"/>
+          <circle cx="200" cy="200" r="78" class="r-cekirdek-hale" id="hale"/>
+          <circle cx="200" cy="200" r="58" fill="url(#cekirdekGrad)" class="r-cekirdek" id="cekirdek"/>
+          <g class="altigen don don-ters-24">
+            <polygon points="200,160 235,180 235,220 200,240 165,220 165,180" class="r-altigen"/>
+          </g>
+        </svg>
+        <div class="reaktor-yazi">
+          <div class="ry-durum" id="ry-durum">BAŞLATILIYOR</div>
+          <div class="ry-alt" id="ry-alt">sistem yükleniyor</div>
+        </div>
+      </div>
+
+      <div class="altyazi" id="altyazi">
+        <span class="ipucu">“<b>Jarvis</b>” diyerek seslen · örn. “Jarvis, Steam'i aç”</span>
+      </div>
+    </div>
+
+    <section class="panel kayit-panel">
+      <h2><span>01</span>İLETİŞİM KAYDI <em id="kayit-sayi">0</em>
+        <button class="metin-btn" id="btn-temizle">temizle</button>
+      </h2>
+      <div class="kayit" id="kayit"></div>
+      <form class="komut-satir" id="komut-form" autocomplete="off">
+        <button type="button" class="mic-btn" id="btn-mic" title="Dinlemeyi duraklat / devam ettir">
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+        <span class="istem">›</span>
+        <input id="komut-girdi" placeholder="Komut yaz ve Enter'a bas…  (komut ya da soru: “Steam'i aç”, “Ay'a ne kadar uzak?”)">
+        <button type="submit" class="gonder-btn">GÖNDER</button>
+      </form>
+    </section>
+  </section>
+</main>
+
+<!-- ÇEKMECELER (üst çubuktaki düğmelerle açılır) -->
+<div class="perde" id="perde"></div>
+
+<aside class="cekmece sol-taraf" id="c-sistem" aria-label="Sistem durumu">
+  <header class="cekmece-bas"><h2><span>SYS</span>SİSTEM DURUMU</h2><button class="cekmece-kapat" title="Kapat (Esc)">✕</button></header>
+  <div class="cekmece-govde">
+      <div class="gostergeler">
+        <div class="halka-gosterge" id="g-cpu">
+          <div class="hg-kutu"><svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" class="hg-iz"/>
+            <circle cx="50" cy="50" r="42" class="hg-dolu"/>
+            <circle cx="50" cy="50" r="34" class="hg-ic"/>
+          </svg>
+          <div class="hg-deger"><b>0</b><small>%</small></div></div>
+          <div class="hg-ad">İŞLEMCİ</div>
+        </div>
+        <div class="halka-gosterge" id="g-ram">
+          <div class="hg-kutu"><svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" class="hg-iz"/>
+            <circle cx="50" cy="50" r="42" class="hg-dolu"/>
+            <circle cx="50" cy="50" r="34" class="hg-ic"/>
+          </svg>
+          <div class="hg-deger"><b>0</b><small>%</small></div></div>
+          <div class="hg-ad">BELLEK</div>
+        </div>
+      </div>
+      <div class="cubuk-satir">
+        <div class="cs-ust"><span>DİSK (C:)</span><b id="disk-yazi">—</b></div>
+        <div class="cubuk"><i id="disk-cubuk"></i></div>
+      </div>
+      <div class="cubuk-satir">
+        <div class="cs-ust"><span>PİL</span><b id="pil-yazi">—</b></div>
+        <div class="cubuk"><i id="pil-cubuk"></i></div>
+      </div>
+      <dl class="veri-liste">
+        <div><dt>AĞ ↓</dt><dd id="ag-in">—</dd></div>
+        <div><dt>AĞ ↑</dt><dd id="ag-out">—</dd></div>
+        <div><dt>SÜREÇ</dt><dd id="surec">—</dd></div>
+        <div><dt>AÇIK KALMA</dt><dd id="acik-kalma">—</dd></div>
+      </dl>
+    <h3 class="alt-baslik">OTURUM</h3>
+    <dl class="veri-liste buyuk">
+      <div><dt>KOMUT</dt><dd id="o-komut">0</dd></div>
+      <div><dt>BAŞARI</dt><dd id="o-basari">—</dd></div>
+      <div><dt>SÜRE</dt><dd id="o-sure">00:00</dd></div>
+    </dl>
+  </div>
+</aside>
+
+<aside class="cekmece sag-taraf" id="c-uygulamalar" aria-label="Hızlı erişim">
+  <header class="cekmece-bas"><h2><span>APP</span>HIZLI ERİŞİM</h2><button class="cekmece-kapat" title="Kapat (Esc)">✕</button></header>
+  <div class="cekmece-govde">
+    <p class="cekmece-aciklama">Tıkladığın uygulamayı Jarvis açar. Sesle de söyleyebilirsin: “Jarvis, Spotify'ı aç”.</p>
+    <div class="hizli" id="hizli"></div>
+  </div>
+</aside>
+
+<aside class="cekmece sag-taraf" id="c-rehber" aria-label="Komut rehberi">
+  <header class="cekmece-bas"><h2><span>?</span>KOMUT REHBERİ</h2><button class="cekmece-kapat" title="Kapat (Esc)">✕</button></header>
+  <div class="cekmece-govde">
+    <p class="cekmece-aciklama">Bir örneğe tıkla, komut kutusuna yazılsın. Bilgisayar komutu olmayan her cümle soru olarak yapay zekâya gider.</p>
+    <div class="rehber" id="rehber"></div>
+  </div>
+</aside>
+
+<aside class="cekmece sag-taraf genis" id="c-ayarlar" aria-label="Ayarlar">
+  <header class="cekmece-bas"><h2><span>CFG</span>AYARLAR <em class="kaydedilmedi" id="kaydedilmedi">● kaydedilmedi</em></h2><button class="cekmece-kapat" title="Kapat (Esc)">✕</button></header>
+  <nav class="sekmeler" id="sekmeler"></nav>
+  <div class="ayar-govde" id="ayar-govde"></div>
+  <div class="ayar-alt">
+    <button class="ikincil-btn" id="btn-varsayilan">SIFIRLA</button>
+    <button class="ana-btn" id="btn-kaydet">KAYDET</button>
+  </div>
+</aside>
+
+<footer class="alt">
+  <span class="alt-sol"><i class="nabiz"></i><span id="alt-durum">ÇEKİRDEK BAŞLATILIYOR</span></span>
+  <span class="alt-kayan"><span id="kayan">SES TANIMA: GOOGLE · KONUŞMA MOTORU: WINDOWS SAPI · ACİL DURDURMA: FAREYİ SOL ÜST KÖŞEYE GÖTÜR · </span></span>
+  <span class="alt-haplar">
+    <span class="hap kucuk" id="hap-durum"><i></i><b id="hap-durum-yazi">BAŞLATILIYOR</b></span>
+    <span class="hap kucuk" id="hap-mic"><i></i>MİKROFON</span>
+    <span class="hap kucuk" id="hap-ag"><i></i>AĞ</span>
+  </span>
+  <button class="metin-btn" id="btn-gunluk">günlüğü aç</button>
+</footer>
+
+<div class="bildirim" id="bildirim"></div>
+<script src="jarvis.js"></script>
+</body>
+</html>
